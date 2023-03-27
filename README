@@ -1,0 +1,2 @@
+ansible-playbook --vault-password-file vaultpw  playbook.yam
+ansible-vault encrypt_string --vault-password-file vaultpw --stdin-name 'DO_API_TOKEN'
