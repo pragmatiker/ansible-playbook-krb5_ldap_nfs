@@ -1,5 +1,5 @@
 ---
-- name: Deploay Droplet
+- name: Deploy Droplet
   community.digitalocean.digital_ocean_droplet:
     state: present
     oauth_token: "{{DO_API_TOKEN}}"
@@ -22,6 +22,6 @@
     domain: fogcity.de
     ttl: 36
     type: A
-    name: "{{inventory_hostname}}"
+    name: "{{inventory_hostname.split('.')[0] | lower }}"
     data: "{{ (my_droplet.data.droplet.networks.v4 | selectattr('type', 'equalto', 'public')).0.ip_address | default('<none>', true) }}"
     force_update: yes

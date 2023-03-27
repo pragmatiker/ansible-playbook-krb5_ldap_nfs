@@ -1,0 +1,22 @@
+---
+- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+  ansible.builtin.wait_for:
+    port: 22
+    host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+    search_regex: OpenSSH
+    delay: 10
+  connection: local
+
+- name: Add user for SSH
+  ansible.builtin.user:
+    name: "{{ lookup('env','USER') }}"
+    shell: /bin/bash
+    password: "$y$j9T$Ay7eRT8y5bF2s7wKq8S6x.$vD3WQVJVhkNaY.CxMfASeAv15McR8Da8enbDcIWDbH7"
+    groups: sudo
+    append: yes
+
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: "{{ lookup('env','USER') }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"

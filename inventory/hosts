@@ -1,6 +1,6 @@
 [server]
-ds01
+ds01.fogcity.de
 
 [clients]
-cl01
-cl02
+cl01.fogcity.de
+cl02.fogcity.de
