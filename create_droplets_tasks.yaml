@@ -4,6 +4,7 @@
     state: present
     oauth_token: "{{DO_API_TOKEN}}"
     name: "{{inventory_hostname}}"
+    id: "{{ lookup('csvfile', inventory_hostname + ' file=droplet_list.csv delimiter=,') | default('0') | int}}"
     size: s-1vcpu-512mb-10gb 
     region: fra1
     image: ubuntu-22-04-x64
@@ -11,9 +12,11 @@
     ssh_keys: ['08:36:03:0a:a9:ed:35:8f:a5:78:53:8c:d0:c9:3c:d8']
   register: my_droplet
 
-- name: Show Droplet info
-  ansible.builtin.debug:
-   msg: "{{ my_droplet.data.droplet.id }}"
+- name: Record Droplet to file
+  lineinfile:
+    path: droplet_list.csv
+    line: "{{inventory_hostname}},{{my_droplet.data.droplet.id}}"   
+    create: true
    
 - name: Update A record for www based on name/type/data
   community.digitalocean.digital_ocean_domain_record:

@@ -17,14 +17,15 @@
   tasks:
     - name: Deploy Droplets        
       import_tasks: create_droplets_tasks.yaml
-      when: create_droplets | default(False)  
       delegate_to: localhost
       
     - name: Create User        
       import_tasks: create_user_tasks.yaml
       
-    
-    
+    - name: Destroy Droplets        
+      import_tasks: destroy_droplets_tasks.yaml
+      when: destroy_droplets | default(False)  
+      delegate_to: localhost    
     
     
     
