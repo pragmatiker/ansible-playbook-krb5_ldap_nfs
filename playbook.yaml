@@ -15,7 +15,7 @@
           62396266326663333066616631663264663931383238316263636265653162616130613731666535
           34356431366462666636
   roles:
-    - ansible-roles-digital_ocean_droplets
+    - ansible-role-digital_ocean_droplets
   tasks:
     - name: Create User        
       import_tasks: create_user_tasks.yaml
