@@ -14,18 +14,11 @@
           61316263393034336435363262303933376533343738336639326264343831626664316634613034
           62396266326663333066616631663264663931383238316263636265653162616130613731666535
           34356431366462666636
+  roles:
+    - ansible-roles-digital_ocean_droplets
   tasks:
-    - name: Deploy Droplets        
-      import_tasks: create_droplets_tasks.yaml
-      delegate_to: localhost
-      
     - name: Create User        
       import_tasks: create_user_tasks.yaml
-      
-    - name: Destroy Droplets        
-      import_tasks: destroy_droplets_tasks.yaml
-      when: destroy_droplets | default(False)  
-      delegate_to: localhost    
     
     
     
