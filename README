@@ -1,5 +1,5 @@
 # Deploy droplets user root to create initial non root user accoiun
-ansible-playbook --vault-password-file vaultpw  playbook.yaml -uroot
+  ansible-playbook --vault-password-file vaultpw  playbook.yaml -uroot
 
 # Encrypt your API Token
-ansible-vault encrypt_string --vault-password-file vaultpw --stdin-name 'DO_API_TOKEN'
+  ansible-vault encrypt_string --vault-password-file vaultpw --stdin-name 'DO_API_TOKEN'
